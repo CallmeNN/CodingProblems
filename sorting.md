@@ -20,9 +20,9 @@ inplace: Aux space: O(1)
 ```
 2. Selection sort:
 
-3. mergesort
-
 ```
+
+3. mergesort
 private static void merge(int[] arr, int l, int m, int r){
         int n1 = m-l+1;
         int n2 = r-m;
