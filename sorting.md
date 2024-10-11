@@ -13,14 +13,11 @@ inplace: Aux space: O(1)
 > **Merge Sort:** Stable, Ω\(NlogN\) - θ\(NlogN\) - O\(NlogN\) : O\(N\)
 > **Quick Sort:** Unstable \(Can be turned stable\), Ω\(NlogN\) - θ\(NlogN\) - O\(N²\) : O\(1\)
 
-```
+```cpp
 1. Bubble sort: compare adjacent element and bubble the larget element to end.
-```
 
-```
 2. Selection sort:
 
-```
 
 3. mergesort
 private static void merge(int[] arr, int l, int m, int r){
@@ -59,4 +56,4 @@ private static void merge(int[] arr, int l, int m, int r){
         }
         
     }
-    ```
+```
