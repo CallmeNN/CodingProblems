@@ -1,4 +1,12 @@
 ```cpp
+1. Maximum Subarray: maximum subarray in range A[low...high] -> Any contiguous max subarray, A[i...j] must lie at one of these places:
+a. entirely in left subarray A[low...mid]
+b. entirely in right subarray A[mid+1...high]
+c. crossing the midpoint, low<=i<=mid<j<=high, i.e. between low and high.
+
+finally max of all three subarrays is ans
+
+
   class Solution {
     private int findMaxCrossSubArray(int[] nums, int l, int m, int h){
         int leftSum = Integer.MIN_VALUE;
