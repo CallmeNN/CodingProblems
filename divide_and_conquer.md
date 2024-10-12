@@ -5,6 +5,7 @@ b. entirely in right subarray A[mid+1...high]
 c. crossing the midpoint, low<=i<=mid<j<=high, i.e. between low and high.
 
 finally max of all three subarrays is ans
+T(n) = 2T(n/2) + O(n) = nlogn
 
 
   class Solution {
