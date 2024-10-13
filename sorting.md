@@ -19,7 +19,7 @@ inplace: Aux space: O(1)
 2. Selection sort:
 
 
-3. mergesort
+1. mergesort
 private static void merge(int[] arr, int l, int m, int r){
         int n1 = m-l+1;
         int n2 = r-m;
@@ -56,4 +56,60 @@ private static void merge(int[] arr, int l, int m, int r){
         }
         
     }
+
+2. Quick sort: /* Randomized quick sort (picking random pivot index instead of r) gives
+NlogN in worst aswell */
+// Quick sort is worst when - already sorted (asc or desc) or all elems are same
+
+import java.lang.Math;
+class Solution {
+
+    private int random(int l,int r){
+        return l + (int) (Math.random() * (r - l));
+    }
+
+
+
+    private int partition(int A[],int l,int r){
+        int i = l-1;
+        for(int j=l;j<r;j++){
+            if(A[j]<A[r]){
+                i++;
+                //exchange A[i] with A[j]
+                int k = A[i];
+                A[i] = A[j];
+                A[j] = k;
+            }
+        }
+        //exchange A[i+1] with A[r]
+        int temp = A[r];
+        A[r] = A[i+1];
+        A[i+1] = temp;
+        return i+1;
+    }
+
+    private int randomPartition(int[] A,int l, int r){
+        int pivot = random(l,r);
+        // Swap A[pivot] with A[r] to move pivot element to the end
+        int temp = A[pivot];
+        A[pivot] = A[r];
+        A[r] = temp;
+        return partition(A,l,r);
+
+    }
+
+    private int[] quickSort(int[] nums,int l,int r){
+        if(l<r){
+        int m = randomPartition(nums,l,r);
+        quickSort(nums,l,m-1);
+        quickSort(nums,m+1,r);
+        }
+        return nums;   
+    }
+
+    public int[] sortArray(int[] nums) {
+        int[] arr = quickSort(nums,0,nums.length-1);
+        return arr;
+    }
+} 
 ```
