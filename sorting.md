@@ -111,5 +111,79 @@ class Solution {
         int[] arr = quickSort(nums,0,nums.length-1);
         return arr;
     }
-} 
+}
+
+3. class Solution {
+
+    // Corrected swap method to swap elements in the array
+    public void swap(int[] nums, int a, int b) {
+        int temp = nums[a];
+        nums[a] = nums[b];
+        nums[b] = temp;
+    }
+
+    // Heapify method to maintain max-heap property
+    private void heapify(int[] nums, int n, int i) {
+        int largest = i;  // Initialize largest as root
+        int l = 2 * i + 1;  // Left child
+        int r = 2 * i + 2;  // Right child
+
+        // If left child is larger than root
+        if (l < n && nums[l] > nums[largest]) {
+            largest = l;
+        }
+
+        // If right child is larger than largest so far
+        if (r < n && nums[r] > nums[largest]) {
+            largest = r;
+        }
+
+        // If largest is not root, swap and continue heapifying
+        if (largest != i) {
+            swap(nums, i, largest);  // Swap root with largest
+            heapify(nums, n, largest);  // Heapify the affected subtree
+        }
+    }
+
+    // Build the heap (rearrange the array)
+    private void buildHeap(int[] nums, int n) {
+        for (int i = (n / 2) - 1; i >= 0; i--) {
+            heapify(nums, n, i);
+        }
+    }
+
+    // Heap sort method
+    private void heapsort(int[] nums, int n) {
+        // Build a max heap
+        buildHeap(nums, n);
+
+        // Extract elements from the heap one by one
+        for (int i = n - 1; i > 0; i--) {
+            // Move current root (largest) to the end
+            swap(nums, 0, i);
+
+            // Call heapify on the reduced heap
+            heapify(nums, i, 0);
+        }
+    }
+
+    // Main method to sort the array
+    public int[] sortArray(int[] nums) {
+        heapsort(nums, nums.length);
+        return nums;
+    }
+
+    // Testing the solution
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int[] nums = {12, 11, 13, 5, 6, 7};
+        int[] sortedArray = solution.sortArray(nums);
+
+        System.out.println("Sorted Array: ");
+        for (int num : sortedArray) {
+            System.out.print(num + " ");
+        }
+    }
+}
+
 ```
