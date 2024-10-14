@@ -113,7 +113,8 @@ class Solution {
     }
 }
 
-3. class Solution {
+3. Heap sort : O(nlogn)
+class Solution {
 
     // Corrected swap method to swap elements in the array
     public void swap(int[] nums, int a, int b) {
@@ -185,5 +186,69 @@ class Solution {
         }
     }
 }
+
+4. radix sort TC: O(n*d) space: (n+d)
+
+class Solution {
+    private void countSort(int[] nums, int pos, int n) {
+        int[] count = new int[10];
+        int[] B = new int[n];
+
+        // Increment the value at index corresponding to digit that we encounter
+        for (int i = 0; i < n; i++) {
+            ++count[(nums[i] / pos) % 10];
+        }
+
+        // Update the count array to set the position of the digits
+        for (int i = 1; i < 10; i++) {
+            count[i] += count[i - 1];
+        }
+
+        // Build the output array in reverse order to maintain stability
+        for (int i = n - 1; i >= 0; i--) {
+            B[--count[(nums[i] / pos) % 10]] = nums[i];
+        }
+
+        // Copy the output array to nums
+        for (int i = 0; i < n; i++) {
+            nums[i] = B[i];
+        }
+    }
+
+    private void radixSort(int[] nums, int n) {
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] > max) {
+                max = nums[i];
+            }
+        }
+
+        // Sort by each digit, from least significant to most significant
+        for (int pos = 1; max / pos > 0; pos *= 10) {
+            countSort(nums, pos, n);
+        }
+    }
+
+    public int maximumGap(int[] nums) {
+        if (nums.length < 2) {
+            return 0;
+        }
+
+        // Sort the array using radix sort
+        radixSort(nums, nums.length);
+
+        int maxGap = 0;
+        // Find the maximum gap between successive elements
+        for (int i = 1; i < nums.length; i++) {
+            int currGap = nums[i] - nums[i - 1]; // No need for Math.abs here as nums is sorted
+            if (currGap > maxGap) {
+                maxGap = currGap;
+            }
+        }
+
+        return maxGap;
+    }
+}
+
 
 ```
